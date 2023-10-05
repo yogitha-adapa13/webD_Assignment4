@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <title>Feedback</title>
+  <style>
+    label {	float: left;
+			width: 150px;}
+      #container{
+          width: 700px;
+          margin: auto;
+          background-color: beige;
+      } 
+      main{
+          padding: 50px;
+      }
+	  .error {
+            color: red;
+            font-size: 12px;
+        }
+
+        .field-error {
+            border: 1px solid red;
+        }
+		.errorClass{
+			color:red;
+			display:inline;
+		}
+		.noerrorClass{
+			display:none;
+		}
+  </style>
+ </head>
+ <body onload="loadfunc()">
+ <div id="container">
+	 
+	 <main>
+	 <h2>Feeback</h2>
+	 <h3>Love something? Hate something? Let us know!</h3>
+		 Note : Fields marked with an asterisk(*) are mandatory
+		 <br><br>
+		 <form name="form1" id="form1" method="post">
+			<label>Title*:</label>
+			<input type="radio" name="title" id="miss" value="miss" required="required" onclick="checktitle()"/>Miss
+			<input type="radio" name="title" id="mr" value="mr" required="required" onclick="checktitle()"/>Mr.
+			<input type="radio" name="title" id="mrs" value="mrs" required="required" onclick="checktitle()"/>Mrs. 
+			<span class="errorClass" id="titleError">Title is required</span>
+			<br><br>
+			<label for="firstName">First Name*:</label>
+			<input type="text" name="firstName" id="firstName" placeholder="First Name" onblur="validateName('First Name','nameError1','firstName')" />	
+			<span class="errorClass" id="nameError1">Name is required</span>
+			<br><br>
+			
+
+			<label for="lastName">Last Name*:</label>
+			<input type="text" name="lastName" id="lastName" placeholder="Last Name" onblur="validateName('Last Name','nameError2','lastName')"  />
+			<span class="errorClass" id="nameError2">Name is required</span>
+			<br><br>
+			
+
+			<label for="emailId">Email Id*:</label>
+			<input type="text" name="emailId" id="emailId" placeholder="yourname@domain.com" onblur="validateEmail()" />
+			<span class="errorClass" id="emailError">Email Id is required</span>
+			<br><br>
+			
+
+			<label for="phoneNumber">Phone Number*:</label>
+			<input type="text" name="phoneNumber" id="phoneNumber" placeholder="xxx-xxx-xxxx" onblur="validatePhone()" />
+			<span class="errorClass" id="phoneError">Phone number is required</span>
+			<br><br>
+			
+			<label for="streetaddress1">Street Addresss 1*:</label>
+			<input type="text" name="streetaddress1" id="streetaddress1" placeholder="" onblur="validateName('Street Addresss 1','streetError','streetaddress1')" />
+			<span class="errorClass" id="streetError">Street Address is required</span>
+			<br><br>
+
+			<label for="streetaddress2">Street Addresss 2:</label>
+			<input type="text" name="streetaddress2" id="streetaddress2" placeholder=""  />
+			<br><br>
+
+			<label for="city">City*:</label>
+			<input type="text" name="city" id="city" placeholder="" onblur="validateName('City','cityError','city')" />
+			<span class="errorClass" id="cityError">City is required</span>
+			<br><br>
+
+			<label for="state">State*:</label>
+			<input type="text" name="state" id="state" placeholder="" onblur="validateName('State','stateError','state')" />
+			<span class="errorClass" id="stateError">State is required</span>
+			<br><br>
+			
+            <label for="zipcode">ZipCode*:</label>
+			<input type="text" name="zipcode" id="zipcode" placeholder="xxxxxx" onblur="validateZipcode()" />
+			<span class="errorClass" id="zipcodeError">Zipcode is required</span>
+			<br><br>
+             
+            <label for="zipcode">How did you hear*:</label>
+			<input type='checkbox' name="source" id="Facebook" value="facebook" onClick ="checksource();"/> Facebook
+            <input type='checkbox' name="source"  id="Google" value="google"  onClick ="checksource();"/> Google
+            <input type='checkbox' name="source"  id="Yelp" value="yelp"  onClick ="checksource();"/> Yelp 
+            <span class="errorClass" id="sourceError">Source is required</span>
+			<br><br> 
+      <label>Drinks*:</label>
+      <select id="sellist" name="sellist" onChange="showcheck();">
+      	<option name="" value="">Select</option>
+      	<option name="Tea" value="Tea">Tea</option>
+		  <option name="Coffee" value="Coffee">Coffee</option>
+		  <option name="Hot Chocolate" value="Hot Chocolate">Hot Chocolate</option>
+		  <option name="Coke" value="Coke">Coke</option>
+		  <option name="Mocktails" value="Mocktails">Mocktails</option>
+      </select><span class="errorClass" id="drinksError"> Drinks is required</span><br><br>
+      <span id="teacheck" style="display:none;">
+      <input onclick="callcheck('largetea',1)" type="checkbox" id="largetea" name="largetea"> Large Tea <input onclick="callcheck('midtea',2)" type="checkbox" id="midtea" name="midtea"> Medium Tea <input onclick="callcheck('regulartea',3)" type="checkbox" id="regulartea" name="regulartea"> Regular Tea
+    <br><br>
+  </span>
+
+    <span id="cofcheck"  style="display:none;">
+      <input onclick="callcheck('largecof',1)" type="checkbox" id="largecof" name="largecof"> Large Coffee <input onclick="callcheck('midcof',2)" type="checkbox" id="midcof" name="midcof"> Medium Coffee 
+      <br><br>
+    </span>
+
+	<span id="chococheck"  style="display:none;">
+		<input onclick="callcheck('largechoco',1)" type="checkbox" id="largechoco" name="largechoco"> Large Hot chocolate <input onclick="callcheck('midchoco',2)" type="checkbox" id="midchoco" name="midchoco"> Medium Hot Chocolate 
+		<br><br>
+	  </span>
+
+	  <span id="cokecheck"  style="display:none;">
+		<input  onclick="callcheck('regularcoke',1)" type="checkbox" id="regularcoke" name="regularcoke"> Regular Coke
+		<br><br>
+	  </span>
+
+	  <span id="mocktailscheck" style="display:none;">
+		<input onclick="callcheck('largemocktails',1)" type="checkbox" id="largemocktails" name="largemocktails"> Large Mocktail <input onclick="callcheck('midmocktails',2)" type="checkbox" id="midmocktails" name="midmocktails"> Medium Mocktail
+	  <br><br>
+	</span>
+	<span id="checktextid1" style="display:none;">
+	<label for="checktext1">Type here</label>
+			<input type="text" name="checktext1" id="checktext1" placeholder="" onblur="validateCheckbox('checkboxError1',1)" />
+			<span class="errorClass" id="checkboxError1">This field has to be filled</span>
+			<br><br>
+	</span>
+
+	<span id="checktextid2" style="display:none;">
+		<label for="checktext2">Type here</label>
+				<input type="text" name="checktext2" id="checktext2" placeholder="" onblur="validateCheckbox('checkboxError2',2)" />
+				<span class="errorClass" id="checkboxError2">This field has to be filled</span>
+				<br><br>
+		</span>
+
+		<span id="checktextid3" style="display:none;">
+			<label for="checktext3">Type here</label>
+					<input type="text" name="checktext3" id="checktext3" placeholder="" onblur="validateCheckbox('checkboxError3',3)" />
+					<span class="errorClass" id="checkboxError3">This field has to be filled</span>
+					<br><br>
+			</span>
+
+			<label for="comments">Comments*:</label>
+			<textarea name="text" id="comments" placeholder="Your comments" rows="5" cols="25" onchange="checkcomments()"></textarea>
+			<span class="errorClass" id="commentsError">Comments are required</span>
+			<br><br>
+			<input type="Submit" id="subbtn" value="Submit Form">
+			<input type="Reset">
+			<br><br>
+		 </form>
+	 </main>
+ </div>
+ <br>
+ <div>
+<h2>Feedback Data:</h2>
+<table id="myTable" style="display: none;" width="100%" border=1>
+	<tr>
+		<th>Name</th>
+		<th>Email ID</th>
+		<th>Phone Number</th>
+		<th>Street Address 1</th>
+		<th>Street Address 2</th>
+		<th>City</th>
+		<th>State</th>
+		<th>Zip Code</th>
+		<th>How did you hear</th>
+		<th>Drinks</th>
+		<th>Comments</th>
+		<th>Rating Selected</th>
+		<th>Rating Comment</th>
+	</tr>
+	</table>
+</div>
+ <script src="script4.js"></script>
+
+ </body>
+</html>
